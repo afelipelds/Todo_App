@@ -13,7 +13,7 @@ const miniCssExtractPlugin = new MiniCssExtractPlugin({
 })
 
 module.exports = {
-    mode: 'development', // "production" | "development" | "none"
+    mode: 'development',
     entry: {
         main: "./src/index",
     },
