@@ -1,9 +1,8 @@
 @import './fonts.scss';
-
-
+@import '~antd/dist/antd.css'; 
 
 body {
-  font-family: 'Gilroy-regular';
+  font-family: 'Gilroy-medium' !important;
   margin: 0;
   padding: 0;
 }
