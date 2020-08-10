@@ -13,7 +13,7 @@ export default (state, action) => {
         todos: [action.payload, ...state.todos]
       } 
 
-    /* case 'EDIT_TODO':
+    case 'EDIT_TODO':
       const updateTodo = action.payload
 
       const updateTodos = state.todos.map( todo => {
@@ -25,7 +25,7 @@ export default (state, action) => {
       })
       return {
         todos: updateTodos
-      }  */
+      } 
   
 
     default: 
