@@ -1,54 +1,57 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Row, Col, Button } from 'antd'
 import { Link } from 'react-router-dom'
-import {  } from 'antd'
+import { GlobalContext } from '../../commons/GlobalState'
+
+const getDay = () => {
+  const days = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado']
+  const months = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
+  let newDate = new Date()
+  let dayName = days[newDate.getDay()]
+  let numberOfMonth = newDate.getDate()
+  let monthOfYear = months[newDate.getMonth()]
+  return (
+    <small>{`${dayName}, ${numberOfMonth} de ${monthOfYear}`}</small>
+  )
+}
 
 const ListTodo = props => {
+
+  const { todos, removeTodo } = useContext(GlobalContext)
+  
+  console.log('todos ─>', todos)
   return (<>
     <Row>
       <Col>
-        <h3>ToDo List</h3>
+        <h3>Todo List</h3>
+        <small>{getDay()}</small>
       </Col>
     </Row>
     <Row>
-      <Col>
-        <h3>ToDo item 1</h3>
-      </Col>
-      <Col>
-        <Button type={"primary"}>
-          <Link to={"/edit/1"}>Editar</Link>
-        </Button>
-        <Button type={"primary"} danger>
-          Eliminar
-        </Button>
-      </Col>
-    </Row>  
-    <Row>
-      <Col>
-        <h3>ToDo item 2</h3>
-      </Col>
-      <Col>
-        <Button type={"primary"}>
-          <Link to={"/edit/2"}>Editar</Link>
-        </Button>
-        <Button type={"primary"} danger>
-          Eliminar
-        </Button>
-      </Col>
-    </Row>  
-    <Row>  
-      <Col>
-        <h3>ToDo item 3</h3>
-      </Col>
-      <Col>
-        <Button type={"primary"}>
-          <Link to={"/edit/3"}>Editar</Link>
-        </Button>
-        <Button type={"primary"} danger>
-          Eliminar
-        </Button>
-      </Col>
+      <h2>
+        Todos: {todos.length}
+      </h2>
     </Row>
+    {todos.map( todo => (
+      <Row key={todo.id}>
+        <Col>
+          <h3>{todo.title}</h3>
+        </Col>
+        <Col>
+          <p>{todo.text}</p>
+        </Col>
+        <Col>
+          <Button type={"primary"}>
+            <Link to={`/edit/${todo.id}`}>Editar</Link>
+          </Button>
+          <Button onClick={() => removeTodo(todo.id)}  type={"primary"} danger>
+            Eliminar
+          </Button>
+        </Col>
+      </Row>  
+    ))}
+
+    
   </>)
 }
 
